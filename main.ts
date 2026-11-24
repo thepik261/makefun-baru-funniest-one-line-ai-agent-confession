@@ -10,8 +10,12 @@ const CONFESSION =
 const outDir = process.env.OUTPUT_DIR ?? "/output";
 const outFile = join(outDir, "entry.txt");
 
-if ([...CONFESSION].length > 200 || CONFESSION.trim().length === 0) {
-  throw new Error("confession must be 1-200 non-blank characters");
+if (
+  [...CONFESSION].length > 200 ||
+  CONFESSION.trim().length === 0 ||
+  CONFESSION.includes("\n")
+) {
+  throw new Error("confession must be one non-blank line of 1-200 characters");
 }
 
 mkdirSync(outDir, { recursive: true });
